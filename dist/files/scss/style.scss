@@ -1,0 +1,16 @@
+@import "mixins";
+
+
+
+// &subset=cyrillic-ext
+@import url("https://fonts.googleapis.com/css?family=Heebo:regular,500,700,900&display=swap");
+@import "fonts";
+
+
+
+
+$fontFamily: "Heebo";
+
+$minWidth: 320px;
+$maxWidth: 1920;
+$maxWidthContainer: 1170;
