@@ -1,52 +1,84 @@
-import gulp from 'gulp'
-import { path } from './gulp/config/path.js'
-import { copy } from './gulp/tasks/copy.js'
-import { reset } from './gulp/tasks/reset.js'
-import { html } from './gulp/tasks/html.js'
-import { js } from './gulp/tasks/js.js'
-import { scss } from './gulp/tasks/scss.js'
-import { plugins } from './gulp/config/plugins.js'
-import { server } from './gulp/tasks/server.js'
-import { images } from './gulp/tasks/images.js'
-import { otfToTtf, ttfToWoff, fontsStyle } from './gulp/tasks/fonts.js'
-import { svgSprite } from './gulp/tasks/svgsprite.js'
-import { zip } from './gulp/tasks/zip.js'
-import { ftp } from './gulp/tasks/ftp.js'
+const { src, dest, watch, series, parallel } = require('gulp')
+const scss = require('gulp-sass')(require('sass'))
+const concat = require('gulp-concat')
+const browserSync = require('browser-sync').create()
+const uglify = require('gulp-uglify-es').default
+const autoprefixer = require('gulp-autoprefixer')
+const imagemin = require('gulp-imagemin')
+const del = require('del')
 
 
-global.app = {
-  gulp,
-  path,
-  plugins,
-  isBuild: process.argv.includes('--build'),
-  isDev: !process.argv.includes('--build')
+function styles(){
+  return src('app/scss/style.scss')
+  .pipe(scss({ outputStyle: 'compressed' }))
+  .pipe(concat('style.min.css'))
+  .pipe(autoprefixer({
+    overrideBrowserslist: ['last 3 version'],
+    grid: true
+  }))
+  .pipe(dest('app/css'))
+  .pipe(browserSync.stream())
 }
 
+function scripts(){
+return src(['app/js/main.js'])
+.pipe(concat('main.min.js'))
+.pipe(uglify())
+.pipe(dest('app/js'))
+.pipe(browserSync.stream())
+}
+
+
+function images(){
+  return src('app/img/**/*')
+  .pipe(imagemin([
+    imagemin.gifsicle({interlaced: true}),
+    imagemin.mozjpeg({quality: 75, progressive: true}),
+    imagemin.optipng({optimizationLevel: 5}),
+    imagemin.svgo({
+      plugins: [
+        {removeViewBox: true},
+        {cleanupIDs: false}
+      ]
+    })
+  ]))
+  .pipe(dest('dist/img'))
+}
+
+function cleanDist(){
+  return del('dist')
+}
 
 function watcher(){
-  gulp.watch(path.watch.files, copy) 
-  gulp.watch(path.watch.html, html) 
-  gulp.watch(path.watch.scss, scss) 
-  gulp.watch(path.watch.js, js) 
-  gulp.watch(path.watch.images, images) 
+  watch(['app/scss/**/*.scss'], styles)
+  watch(['app/*.html']).on('change', browserSync.reload)
+  watch(['app/js/**/*.js', '!app/js/main.min.js'], scripts)
 }
 
-export { svgSprite }
+
+function build(){
+  return src([
+    'app/css/style.min.css',
+    'app/js/main.min.js',
+    'app/fonts/**/*',
+    'app/*.html'
+  ], {base: 'app'})
+  .pipe(dest('dist'))
+}
 
 
-const fonts = gulp.series(otfToTtf, ttfToWoff, fontsStyle)
+function browsersync(){
+  browserSync.init({
+    server: {
+      baseDir: 'app/'
+    }
+  })
+}
+exports.styles = styles
+exports.scripts = scripts
+exports.watcher = watcher
+exports.browsersync = browsersync
+exports.images = images
 
-const mainTasks = gulp.series(fonts, gulp.parallel(copy, html, scss, js, images))
-
-const dev = gulp.series(reset, mainTasks, gulp.parallel(watcher, server))
-const build = gulp.series(reset, mainTasks)
-const deployZIP = gulp.series(reset, mainTasks, zip)
-const deployFTP = gulp.series(reset, mainTasks, ftp)
-
-export { dev }
-export { build }
-export { deployZIP }
-export { deployFTP }
-
-
-gulp.task('default', dev)
+exports.build = series(cleanDist, images, build)
+exports.default = parallel(styles, scripts, browsersync, watcher)
