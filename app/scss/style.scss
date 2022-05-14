@@ -1,0 +1,24 @@
+@import 'global';
+@import 'reset';
+
+
+
+
+.header {
+  &__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 120px;
+  }
+  &__nav-list {
+    display: flex;
+  }
+}
+
+.icon_menu {
+  background-color: transparent;
+  border: none;
+}
+
+
