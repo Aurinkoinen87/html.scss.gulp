@@ -1,6 +1,8 @@
 @import 'global';
 @import 'reset';
-
+@import 'vars';
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:regular,600,300italic&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:700&display=swap");
 
 
 
@@ -11,14 +13,48 @@
     align-items: center;
     height: 120px;
   }
+
   &__nav-list {
+    display: flex;
+    &-item-1 {
+      padding-left: 32px;
+    }
+    &-item-2 {
+      padding: 0 78px;
+
+    }
+    &-item-3 {
+      padding: 0 78px;
+    }
+    &-item-4 {
+      padding-right: 60px;
+    }
+    &-link {
+      @extend %title-font;
+      opacity: .9;
+    }
+  }
+  
+  &__menu-btn {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+
+}
+
+
+.logo {
+  margin: 0 auto;
+}
+
+
+.footer {
+
+  &__inner {
     display: flex;
   }
 }
-
-.icon_menu {
-  background-color: transparent;
-  border: none;
-}
-
 
