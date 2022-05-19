@@ -10,6 +10,7 @@ ol[class] {
 }
 
 body,
+a,
 h1,
 h2,
 h3,
@@ -21,6 +22,7 @@ ol,
 ul,
 li {
   margin: 0;
+  font-size: inherit;
 }
 
 ul[class] {
