@@ -184,3 +184,46 @@
   }
 }
 
+
+.side-menu {
+  transition: all 0.8s ease 0s;
+  transform: translateX(100%);
+  max-width: 694px;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #fff;
+  &.side-menu--emerge {
+    transform: translateX(0%);
+  }
+  &__close {
+    background: transparent;
+    border: none;
+    margin: 41px 0 57px 47px;
+  }
+  &__container {
+    max-width: 483px;
+    text-align: center;
+    margin: 0 95px 0 116px;
+  }
+  &__logo {
+    display: inline-block;
+    margin-bottom: 41px;
+  }
+  &__title {
+    color: $black;
+    @extend %title-font;
+    font-size: 36px;
+    line-height: 51px;
+  }
+  &__line {
+    height: 1px;
+    background-color: #979797;
+    margin: 12px 116px 17px;
+  }
+  &__text {
+    margin-bottom: 75px;
+  }
+}
