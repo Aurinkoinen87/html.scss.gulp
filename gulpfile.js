@@ -9,7 +9,11 @@ const del = require('del')
 
 
 function styles(){
-  return src('app/scss/style.scss')
+  return src([
+    'app/scss/style.scss',
+    'node_modules/swiper/swiper.scss',
+    'node_modules/swiper/modules/pagination/pagination.scss'
+    ])
   .pipe(scss({ outputStyle: 'compressed' }))
   .pipe(concat('style.min.css'))
   .pipe(autoprefixer({
@@ -21,7 +25,9 @@ function styles(){
 }
 
 function scripts(){
-return src(['app/js/main.js'])
+return src([
+  'node_modules/swiper/swiper-bundle.js',
+  'app/js/main.js'])
 .pipe(concat('main.min.js'))
 .pipe(uglify())
 .pipe(dest('app/js'))
