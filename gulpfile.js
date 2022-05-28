@@ -10,9 +10,9 @@ const del = require('del')
 
 function styles(){
   return src([
-    'app/scss/style.scss',
     'node_modules/swiper/swiper.scss',
-    'node_modules/swiper/modules/pagination/pagination.scss'
+    'node_modules/swiper/modules/pagination/pagination.scss',
+    'app/scss/style.scss'
     ])
   .pipe(scss({ outputStyle: 'compressed' }))
   .pipe(concat('style.min.css'))

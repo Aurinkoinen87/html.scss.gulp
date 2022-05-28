@@ -53,6 +53,18 @@
 }
 
 .top {
+  &__inner {
+    position: relative;
+    &:after {
+      position: absolute;
+      content: '';
+      width: 100%;
+      top: 0;
+      background: url('../img/symmetry-and-style.jpg');
+      height: 722px;
+      z-index: -1;
+    }
+  }
    &__slider {
     &-content {
       display: flex;
@@ -105,6 +117,101 @@
     margin: 0 15px;
   }
 }
+
+.new-collection {
+  text-align: center;
+  padding: 105px 0;
+  &__title {
+    @extend %title-font;
+    font-size: 36px;
+    line-height: 51px;
+    color: $black;
+    padding: 25px;
+    margin-bottom: 25px;
+    position: relative;
+    &:after {
+      position: absolute;
+      content: '';
+      width: 252px;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      background: #6D7278;
+      height: 1px;
+      margin: 0 auto;
+    }
+  }
+  &__text {
+    max-width: 730px;
+    margin: 0 auto 54px;
+  }
+  .collection-container {
+    max-width: 1920px;
+  }
+  
+
+}
+
+
+
+.collection-pics {
+  display: flex;
+  justify-content: space-around;
+  &__item {
+    position: relative;
+    cursor: pointer;
+  }
+
+  &__text-block {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(#fff, .7);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.3s;
+    &:hover {
+      opacity: .7
+    }
+  }
+  &__title {
+    @extend %title-font;
+    font-size: 20px;
+    line-height: 24px;
+    color: $black;
+    padding: 19px;
+    margin-bottom: 20px;
+    position: relative;
+    &:after {
+      position: absolute;
+      content: '';
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 55%;
+      height: 1px;
+      background: #6D7278;
+      margin: 0 auto;
+    }
+  }
+  &__text {
+    font-weight: 600;
+    font-size: 14px;
+  }
+  &__img {
+    max-width: 350px;
+    object-fit: cover;
+  }
+}
+
+
+
+
 
 .footer {
   &__content {
@@ -244,12 +351,14 @@
   transform: translateX(100%);
   max-width: 694px;
   width: 100%;
+  min-height: 1200px;
+  height: 100%;
   z-index: 10;
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
-  background-color: #fff;
+  background: #fff;
   box-shadow: -3px 0px 4px 0px #928c8c;
   &.side-menu--emerge {
     transform: translateX(0%);
@@ -258,6 +367,7 @@
     background: transparent;
     border: none;
     margin: 41px 0 57px 47px;
+    cursor: pointer;
   }
   &__container {
     max-width: 483px;
