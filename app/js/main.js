@@ -17,4 +17,9 @@
       clickable: true
     }
   })
+  let mixer = mixitup('.mix-gallery__inner', {
+    load: {
+        filter: '.bedroom'
+    }
+})
 }())
