@@ -35,6 +35,20 @@
       color: $black;
       opacity: .9;
     }
+    &-link--active {
+      padding-bottom: 4px;
+      position: relative;
+      &:after {
+        position: absolute;
+        content: '';
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        border-radius: 1px;
+        background: rgba($black, .7);
+      }
+    }
   }
   
   &__menu-btn {
@@ -51,6 +65,12 @@
 .logo {
   margin: 0 auto;
 }
+
+
+
+
+
+
 
 .top {
   &__inner {
@@ -591,5 +611,97 @@
   }
   &__img {
     max-width: 483px;
+  }
+}
+
+.breadcrumbs {
+  padding: 13px 0 14px;
+  background-color: rgba(#DFDFDF, .5);
+  &__list {
+    display: flex;
+  }
+  &__item {
+    &:after {
+    content: '/';
+    margin-left: -4px;
+    margin-right: 4px;
+  }
+    &:last-child:after {
+    content: '';
+  }
+  }
+  &__link {
+  font-size: 14px;
+  color: $grey-text-main;
+}
+&--transparent {
+  background: none;
+}
+}
+
+.about {
+  &__top {
+  background-image: url(../img/about_us.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  text-align: center;
+  }
+  &__title {
+    @extend %title-font;
+    color: $black;
+    font-size: 60px;
+    line-height: 80px;
+    padding: 104px 0 160px;
+  }
+
+  &__mid {
+    padding: 129px 0 40px;
+    &-title {
+      @extend %title-font;
+      color: $black;
+      font-size: 36px;
+      line-height: 60px;
+      max-width: 822px;
+      padding-bottom: 20px;
+      margin-bottom: 23px;
+      position: relative;
+      &:after {
+        position: absolute;
+        content: '';
+        height: 2px;
+        background: #979797;
+        bottom: 0;
+        left: 0;
+        width: 200px;
+      }
+    }
+  }
+  &__text {
+    margin-bottom: 40px;
+    padding-left: 285px;
+  }
+  &__media {
+    background-image: url(../img/about_play_bg.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 414px;
+  }
+  &__play {
+    padding-left: 7px;
+  }
+  &__play-circle {
+    width: 80px;
+    height: 80px;
+    background-color: rgba($black, .4);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
   }
 }
