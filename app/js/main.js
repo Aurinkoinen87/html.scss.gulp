@@ -3,8 +3,29 @@
   let sideMenu = document.querySelector('.side-menu')
   let sideMenuCloseBtn = document.querySelector('.side-menu__close')
 
+
+
   menuBtn.addEventListener('click', ()=> sideMenu.classList.add('side-menu--emerge'))
   sideMenuCloseBtn.addEventListener('click', ()=> sideMenu.classList.remove('side-menu--emerge'))
+
+  let playBtn = document.querySelector('.about__play-link')
+  let closePopUp = document.querySelector('.pop-up__close')
+  let popUpWindow = document.querySelector('.pop-up')
+
+  playBtn.addEventListener('click', (e)=> {
+    e.preventDefault()
+    popUpWindow.classList.add('pop-up--active')
+})
+
+  closePopUp.addEventListener('click', ()=> {
+    popUpWindow.classList.remove('pop-up--active')
+  })
+
+  document.addEventListener('click', (e)=> {
+    if(e.target == popUpWindow){
+      popUpWindow.classList.remove('pop-up--active')
+    }
+  })
 
   const swiper = new Swiper('.swiper', {
     // Optional parameters
@@ -22,4 +43,6 @@
         filter: '.bedroom'
     }
 })
+
+
 }())
